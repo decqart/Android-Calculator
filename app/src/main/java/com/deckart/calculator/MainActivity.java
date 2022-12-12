@@ -40,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.button14).setOnClickListener(view -> txt.setText(txt.getText().toString() + "0"));
         findViewById(R.id.button15).setOnClickListener(view -> equation(7));
         findViewById(R.id.button16).setOnClickListener(view -> equation(4));
-        findViewById(R.id.button17).setOnClickListener(view -> Toast.makeText(context,"Not supported", Toast.LENGTH_LONG).show());
+        findViewById(R.id.button17).setOnClickListener(view -> Toast.makeText(context, "Not supported", Toast.LENGTH_LONG).show());
         findViewById(R.id.button18).setOnClickListener(view -> equation(6));
-        findViewById(R.id.button19).setOnClickListener(view -> Toast.makeText(context,"Not supported",Toast.LENGTH_LONG).show());
+        findViewById(R.id.button19).setOnClickListener(view -> Toast.makeText(context, "Not supported", Toast.LENGTH_LONG).show());
         findViewById(R.id.button20).setOnClickListener(view -> txt.setText(""));
     }
 
@@ -56,25 +56,25 @@ public class MainActivity extends AppCompatActivity {
         int divI = calc.indexOf("/");
         int calcL = calc.length();
 
-        boolean CalcArgs = (plusI & subI & divI & multiI) < 0 & !calc.equals("") & !calc.equals("-");
+        boolean calcArgs = (plusI & subI & divI & multiI) < 0 && !calc.equals("") && !calc.equals("-");
         switch (i) {
             case 1:
-                if (CalcArgs) {
+                if (calcArgs) {
                     txt.setText(calc + "/");
                 }
                 break;
             case 2:
-                if (CalcArgs) {
+                if (calcArgs) {
                     txt.setText(calc + "x");
                 }
                 break;
             case 3:
-                if ((plusI & subI & divI & multiI) < 0 & !calc.equals("-")) {
+                if ((plusI & subI & divI & multiI) < 0 && !calc.equals("-")) {
                     txt.setText(calc + "-");
                 }
                 break;
             case 4:
-                if (CalcArgs) {
+                if (calcArgs) {
                     txt.setText(calc + "+");
                 }
                 break;
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             case 6:
-                if (CalcArgs) {
+                if (calcArgs) {
                     double per = Double.parseDouble(calc);
                     double perEnd = per / 100;
                     BigDecimal BPer = new BigDecimal(perEnd).setScale(4,RoundingMode.HALF_UP);
@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             case 7:
-                if (calc.endsWith("+") | calc.endsWith("-") | calc.endsWith("/") | calc.endsWith("x")) {
+                if (calc.endsWith("+") || calc.endsWith("-") || calc.endsWith("/") || calc.endsWith("x")) {
                     break;
                 }
                 if (plusI > 0) {
