@@ -4,11 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    tools:ignore="HardcodedText" >
 
     <Button
         android:id="@+id/button13"
-        android:layout_width="80dp"
+        android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
@@ -22,7 +23,7 @@
 
     <Button
         android:id="@+id/button15"
-        android:layout_width="80dp"
+        android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
@@ -37,7 +38,7 @@
 
     <Button
         android:id="@+id/button14"
-        android:layout_width="80dp"
+        android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
@@ -51,7 +52,7 @@
 
     <Button
         android:id="@+id/button17"
-        android:layout_width="80dp"
+        android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
@@ -65,7 +66,7 @@
 
     <Button
         android:id="@+id/button19"
-        android:layout_width="80dp"
+        android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="300dp"
@@ -78,7 +79,7 @@
 
     <Button
         android:id="@+id/button20"
-        android:layout_width="80dp"
+        android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="300dp"
@@ -91,7 +92,7 @@
 
     <Button
         android:id="@+id/button11"
-        android:layout_width="80dp"
+        android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
@@ -105,7 +106,7 @@
 
     <Button
         android:id="@+id/button9"
-        android:layout_width="80dp"
+        android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
@@ -118,7 +119,7 @@
 
     <Button
         android:id="@+id/button8"
-        android:layout_width="80dp"
+        android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
@@ -131,7 +132,7 @@
 
     <Button
         android:id="@+id/button7"
-        android:layout_width="80dp"
+        android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
@@ -144,7 +145,7 @@
 
     <Button
         android:id="@+id/button12"
-        android:layout_width="80dp"
+        android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
@@ -158,7 +159,7 @@
 
     <Button
         android:id="@+id/button6"
-        android:layout_width="80dp"
+        android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
@@ -171,7 +172,7 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="80dp"
+        android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
@@ -184,7 +185,7 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="80dp"
+        android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
@@ -197,7 +198,7 @@
 
     <Button
         android:id="@+id/button16"
-        android:layout_width="80dp"
+        android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
@@ -211,7 +212,7 @@
 
     <Button
         android:id="@+id/button5"
-        android:layout_width="80dp"
+        android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
@@ -224,7 +225,7 @@
 
     <Button
         android:id="@+id/button4"
-        android:layout_width="80dp"
+        android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
@@ -237,7 +238,7 @@
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="80dp"
+        android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
@@ -250,7 +251,7 @@
 
     <Button
         android:id="@+id/button10"
-        android:layout_width="80dp"
+        android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="300dp"
@@ -264,7 +265,7 @@
 
     <Button
         android:id="@+id/button18"
-        android:layout_width="80dp"
+        android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="300dp"
@@ -280,7 +281,7 @@
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="79dp"
+        android:layout_marginTop="80dp"
         android:layout_marginEnd="10dp"
         android:cursorVisible="false"
         android:inputType="text"
