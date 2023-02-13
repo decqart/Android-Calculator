@@ -13,6 +13,7 @@ import java.math.RoundingMode;
 
 public class MainActivity extends AppCompatActivity {
     TextView txt;
+    int op_count = 0;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -43,110 +44,137 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.button17).setOnClickListener(view -> Toast.makeText(context, "Not supported", Toast.LENGTH_LONG).show());
         findViewById(R.id.button18).setOnClickListener(view -> equation(6));
         findViewById(R.id.button19).setOnClickListener(view -> Toast.makeText(context, "Not supported", Toast.LENGTH_LONG).show());
-        findViewById(R.id.button20).setOnClickListener(view -> txt.setText(""));
+        findViewById(R.id.button20).setOnClickListener(view -> {
+            txt.setText("");
+            op_count = 0;
+        });
     }
 
     @SuppressLint("SetTextI18n")
-    void equation(int i) {
+    void equation(int eq) {
         String calc = txt.getText().toString();
 
-        int plusI = calc.indexOf("+");
-        int subI = calc.indexOf("-",1);
-        int multiI = calc.indexOf("x");
-        int divI = calc.indexOf("/");
+        boolean plusI = !calc.endsWith("+");
+        boolean subI = !calc.endsWith("-");
+        boolean multiI = !calc.endsWith("x");
+        boolean divI = !calc.endsWith("/");
         int calcL = calc.length();
 
-        boolean calcArgs = (plusI & subI & divI & multiI) < 0 && !calc.equals("") && !calc.equals("-");
-        switch (i) {
+        System.out.println(op_count);
+        boolean calcArgs = plusI && subI && divI && multiI && !calc.equals("");
+        switch (eq) {
             case 1:
+                if (op_count > 39) break;
                 if (calcArgs) {
                     txt.setText(calc + "/");
-                }
+                    op_count++;
+                } else
+                    txt.setText(calc.substring(0, calcL-1) + "/");
                 break;
             case 2:
+                if (op_count > 39) break;
                 if (calcArgs) {
                     txt.setText(calc + "x");
-                }
+                    op_count++;
+                } else
+                    txt.setText(calc.substring(0, calcL-1) + "x");
                 break;
             case 3:
-                if ((plusI & subI & divI & multiI) < 0 && !calc.equals("-")) {
+                if (op_count > 39) break;
+                if (plusI && subI && divI && multiI) {
                     txt.setText(calc + "-");
-                }
+                    op_count++;
+                } else
+                    txt.setText(calc.substring(0, calcL-1) + "-");
                 break;
             case 4:
+                if (op_count > 39) break;
                 if (calcArgs) {
                     txt.setText(calc + "+");
-                }
+                    op_count++;
+                } else
+                    txt.setText(calc.substring(0, calcL-1) + "+");
                 break;
             case 5:
-                if (!calc.contains(".") && !calc.contains("+") && !calc.contains("-") && !calc.contains("/") && !calc.contains("x")) {
-                    txt.setText(calc + ".");
+                int dotCount = 0;
+                for (int i = 0; i < calcL; i++) {
+                    if (calc.toCharArray()[i] == '.')
+                        dotCount++;
                 }
-                if (calc.contains("+") && !calc.substring(plusI+1, calcL).contains(".")) {
-                    txt.setText(calc + ".");
-                } else if (calc.contains("-") && !calc.substring(subI+1, calcL).contains(".")) {
-                    txt.setText(calc + ".");
-                } else if (calc.contains("/") && !calc.substring(divI+1, calcL).contains(".")) {
-                    txt.setText(calc + ".");
-                } else if (calc.contains("x") && !calc.substring(multiI+1, calcL).contains(".")) {
-                    txt.setText(calc + ".");
-                }
+                if (dotCount-1 < op_count) txt.setText(calc + ".");
                 break;
             case 6:
                 if (calcArgs) {
-                    double per = Double.parseDouble(calc);
-                    double perEnd = per / 100;
-                    BigDecimal BPer = new BigDecimal(perEnd).setScale(4,RoundingMode.HALF_UP);
+                    double per = Double.parseDouble(calc) / 100;
+                    BigDecimal BPer = new BigDecimal(per).setScale(4,RoundingMode.HALF_UP);
                     String perEndS = BPer.toString();
-                    String perEndS2 = perEndS.contains(".") ? perEndS.replaceAll("0*$","").replaceAll("\\.$","") : perEndS;
-                    txt.setText(perEndS2);
+                    perEndS = perEndS.contains(".") ? perEndS.replaceAll("0*$","").replaceAll("\\.$","") : perEndS;
+                    txt.setText(perEndS);
                 }
                 break;
             case 7:
                 if (calc.endsWith("+") || calc.endsWith("-") || calc.endsWith("/") || calc.endsWith("x")) {
                     break;
                 }
-                if (plusI > 0) {
-                    String plus1 = calc.substring(0, plusI);
-                    double p1 = Double.parseDouble(plus1);
-                    String plus2 = calc.substring(plusI+1, calcL);
-                    double p2 = Double.parseDouble(plus2);
-                    double pEnd = p1 + p2;
-                    BigDecimal bPlus = new BigDecimal(pEnd).setScale(4,RoundingMode.HALF_UP);
-                    String pEndS = bPlus.toString();
-                    String pEndS2 = pEndS.contains(".") ? pEndS.replaceAll("0*$","").replaceAll("\\.$","") : pEndS;
-                    txt.setText(pEndS2);
-                } else if (subI > 0) {
-                    String sub1 = calc.substring(0, subI);
-                    double s1 = Double.parseDouble(sub1);
-                    String sub2 = calc.substring(subI+1, calcL);
-                    double s2 = Double.parseDouble(sub2);
-                    double sEnd = s1 - s2;
-                    BigDecimal bSub = new BigDecimal(sEnd).setScale(4,RoundingMode.HALF_UP);
-                    String sEndS = bSub.toString();
-                    String sEnds2 = sEndS.contains(".") ? sEndS.replaceAll("0*$","").replaceAll("\\.$","") : sEndS;
-                    txt.setText(sEnds2);
-                } else if (multiI > 0) {
-                    String multi1 = calc.substring(0, multiI);
-                    double m1 = Double.parseDouble(multi1);
-                    String multi2 = calc.substring(multiI+1, calcL);
-                    double m2 = Double.parseDouble(multi2);
-                    double mEnd = m1 * m2;
-                    BigDecimal bMulti = new BigDecimal(mEnd).setScale(4, RoundingMode.HALF_UP);
-                    String mEndS = bMulti.toString();
-                    String mEndS2 = mEndS.contains(".") ? mEndS.replaceAll("0*$","").replaceAll("\\.$","") : mEndS;
-                    txt.setText(mEndS2);
-                } else if (divI > 0) {
-                    String div1 = calc.substring(0, divI);
-                    double d1 = Double.parseDouble(div1);
-                    String div2 = calc.substring(divI+1, calcL);
-                    double d2 = Double.parseDouble(div2);
-                    double dEnd = d1 / d2;
-                    BigDecimal bDiv = new BigDecimal(dEnd).setScale(4, RoundingMode.HALF_UP);
-                    String dEndS = bDiv.toString();
-                    String dEndS2 = dEndS.contains(".") ? dEndS.replaceAll("0*$","").replaceAll("\\.$","") : dEndS;
-                    txt.setText(dEndS2);
+                // use this to parse string
+                char[] operators = new char[45];
+                double[] values = new double[45];
+
+                boolean negative = calc.startsWith("-");
+
+                if (negative)
+                    calc = calc.substring(1);
+
+                String[] sCalc = calc.split("[x/+\\-]");
+                for (int j = 0; j < sCalc.length; j++)
+                    values[j] = Double.parseDouble(sCalc[j]);
+
+                if (negative) values[0] = -values[0];
+
+                char[] cCalc = calc.toCharArray();
+                for (int j = 0, a = 0; j < cCalc.length; j++) {
+                    char ch = cCalc[j];
+                    if (!Character.isDigit(ch) && ch != '.') {
+                        operators[a] = ch;
+                        a++;
+                    }
                 }
+
+                //first iteration
+                for (int j = 0; j < sCalc.length-1; ++j) {
+                    if (operators[j] == 'x') {
+                        values[j] = values[j] * values[j+1];
+                        System.arraycopy(values, j + 2, values, j + 1, sCalc.length - j);
+                        System.arraycopy(operators, j + 1, operators, j, sCalc.length - j);
+                        j--;
+                    } else if (operators[j] == '/') {
+                        values[j] = values[j] / values[j+1];
+                        System.arraycopy(values, j + 2, values, j + 1, sCalc.length - j);
+                        System.arraycopy(operators, j + 1, operators, j, sCalc.length - j);
+                        j--;
+                    }
+                }
+
+                //second iteration
+                for (int j = 0; j < sCalc.length-1; ++j) {
+                    if (operators[j] == '+') {
+                        values[j] = values[j] + values[j+1];
+                        System.arraycopy(values, j + 2, values, j + 1, sCalc.length - j);
+                        System.arraycopy(operators, j + 1, operators, j, sCalc.length - j);
+                        j--;
+                    } else if (operators[j] == '-') {
+                        values[j] = values[j] - values[j+1];
+                        System.arraycopy(values, j + 2, values, j + 1, sCalc.length - j);
+                        System.arraycopy(operators, j + 1, operators, j, sCalc.length - j);
+                        j--;
+                    }
+                }
+                double result = values[0];
+                BigDecimal bigResult = new BigDecimal(result).setScale(4, RoundingMode.HALF_UP);
+                String endResult = bigResult.toString();
+                endResult = endResult.contains(".") ? endResult.replaceAll("0*$","").replaceAll("\\.$","") : endResult;
+                txt.setText(endResult);
+                op_count = 0;
                 break;
         }
     }
