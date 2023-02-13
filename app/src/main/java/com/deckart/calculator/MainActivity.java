@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
         boolean divI = !calc.endsWith("/");
         int calcL = calc.length();
 
-        System.out.println(op_count);
         boolean calcArgs = plusI && subI && divI && multiI && !calc.equals("");
         switch (eq) {
             case 1:
@@ -68,32 +67,36 @@ public class MainActivity extends AppCompatActivity {
                 if (calcArgs) {
                     txt.setText(calc + "/");
                     op_count++;
-                } else
-                    txt.setText(calc.substring(0, calcL-1) + "/");
+                } else {
+                    txt.setText(calc.substring(0, calcL - 1) + "/");
+                }
                 break;
             case 2:
                 if (op_count > 39) break;
                 if (calcArgs) {
                     txt.setText(calc + "x");
                     op_count++;
-                } else
-                    txt.setText(calc.substring(0, calcL-1) + "x");
+                } else {
+                    txt.setText(calc.substring(0, calcL - 1) + "x");
+                }
                 break;
             case 3:
                 if (op_count > 39) break;
                 if (plusI && subI && divI && multiI) {
                     txt.setText(calc + "-");
                     op_count++;
-                } else
-                    txt.setText(calc.substring(0, calcL-1) + "-");
+                } else {
+                    txt.setText(calc.substring(0, calcL - 1) + "-");
+                }
                 break;
             case 4:
                 if (op_count > 39) break;
                 if (calcArgs) {
                     txt.setText(calc + "+");
                     op_count++;
-                } else
-                    txt.setText(calc.substring(0, calcL-1) + "+");
+                } else {
+                    txt.setText(calc.substring(0, calcL - 1) + "+");
+                }
                 break;
             case 5:
                 int dotCount = 0;
@@ -101,7 +104,12 @@ public class MainActivity extends AppCompatActivity {
                     if (calc.toCharArray()[i] == '.')
                         dotCount++;
                 }
-                if (dotCount-1 < op_count) txt.setText(calc + ".");
+                if (dotCount-1 < op_count) {
+                    if (calcArgs)
+                        txt.setText(calc + ".");
+                    else
+                        txt.setText(calc + "0.");
+                }
                 break;
             case 6:
                 if (calcArgs) {
