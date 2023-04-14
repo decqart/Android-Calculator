@@ -15,6 +15,16 @@ public class MainActivity extends AppCompatActivity {
     TextView txt;
     int op_count = 0;
 
+    enum Equations {
+        ADDITION,
+        SUBTRACT,
+        MULTIPLICATION,
+        DIVISION,
+        PERCENT,
+        DOT,
+        EQUAL
+    }
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,15 +44,15 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.button7).setOnClickListener(view -> txt.setText(txt.getText().toString() + "7"));
         findViewById(R.id.button8).setOnClickListener(view -> txt.setText(txt.getText().toString() + "8"));
         findViewById(R.id.button9).setOnClickListener(view -> txt.setText(txt.getText().toString() + "9"));
-        findViewById(R.id.button10).setOnClickListener(view -> equation(1));
-        findViewById(R.id.button11).setOnClickListener(view -> equation(2));
-        findViewById(R.id.button12).setOnClickListener(view -> equation(3));
-        findViewById(R.id.button13).setOnClickListener(view -> equation(5));
+        findViewById(R.id.button10).setOnClickListener(view -> equation(Equations.DIVISION));
+        findViewById(R.id.button11).setOnClickListener(view -> equation(Equations.MULTIPLICATION));
+        findViewById(R.id.button12).setOnClickListener(view -> equation(Equations.SUBTRACT));
+        findViewById(R.id.button13).setOnClickListener(view -> equation(Equations.DOT));
         findViewById(R.id.button14).setOnClickListener(view -> txt.setText(txt.getText().toString() + "0"));
-        findViewById(R.id.button15).setOnClickListener(view -> equation(7));
-        findViewById(R.id.button16).setOnClickListener(view -> equation(4));
+        findViewById(R.id.button15).setOnClickListener(view -> equation(Equations.EQUAL));
+        findViewById(R.id.button16).setOnClickListener(view -> equation(Equations.ADDITION));
         findViewById(R.id.button17).setOnClickListener(view -> Toast.makeText(context, "Not supported", Toast.LENGTH_LONG).show());
-        findViewById(R.id.button18).setOnClickListener(view -> equation(6));
+        findViewById(R.id.button18).setOnClickListener(view -> equation(Equations.PERCENT));
         findViewById(R.id.button19).setOnClickListener(view -> Toast.makeText(context, "Not supported", Toast.LENGTH_LONG).show());
         findViewById(R.id.button20).setOnClickListener(view -> {
             txt.setText("");
@@ -51,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @SuppressLint("SetTextI18n")
-    void equation(int eq) {
+    void equation(Equations eq) {
         String calc = txt.getText().toString();
 
         boolean plusI = !calc.endsWith("+");
@@ -62,25 +72,25 @@ public class MainActivity extends AppCompatActivity {
 
         boolean calcArgs = plusI && subI && divI && multiI && !calc.equals("");
         switch (eq) {
-            case 1:
+            case DIVISION:
                 if (op_count > 39) break;
                 if (calcArgs) {
                     txt.setText(calc + "/");
                     op_count++;
-                } else {
+                } else if (calcL > 1) {
                     txt.setText(calc.substring(0, calcL - 1) + "/");
                 }
                 break;
-            case 2:
+            case MULTIPLICATION:
                 if (op_count > 39) break;
                 if (calcArgs) {
                     txt.setText(calc + "x");
                     op_count++;
-                } else {
+                } else if (calcL > 1) {
                     txt.setText(calc.substring(0, calcL - 1) + "x");
                 }
                 break;
-            case 3:
+            case SUBTRACT:
                 if (op_count > 39) break;
                 if (plusI && subI && divI && multiI) {
                     txt.setText(calc + "-");
@@ -89,16 +99,16 @@ public class MainActivity extends AppCompatActivity {
                     txt.setText(calc.substring(0, calcL - 1) + "-");
                 }
                 break;
-            case 4:
+            case ADDITION:
                 if (op_count > 39) break;
                 if (calcArgs) {
                     txt.setText(calc + "+");
                     op_count++;
-                } else {
+                } else if (calcL > 1) {
                     txt.setText(calc.substring(0, calcL - 1) + "+");
                 }
                 break;
-            case 5:
+            case DOT:
                 int dotCount = 0;
                 for (int i = 0; i < calcL; i++) {
                     if (calc.toCharArray()[i] == '.')
@@ -111,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                         txt.setText(calc + "0.");
                 }
                 break;
-            case 6:
+            case PERCENT:
                 if (calcArgs) {
                     double per = Double.parseDouble(calc) / 100;
                     BigDecimal BPer = new BigDecimal(per).setScale(4,RoundingMode.HALF_UP);
@@ -120,8 +130,9 @@ public class MainActivity extends AppCompatActivity {
                     txt.setText(perEndS);
                 }
                 break;
-            case 7:
-                if (calc.endsWith("+") || calc.endsWith("-") || calc.endsWith("/") || calc.endsWith("x")) {
+            case EQUAL:
+                if (calc.endsWith("+") || calc.endsWith("-") || calc.endsWith("/") || calc.endsWith("x") ||
+                    calc.isEmpty()) {
                     break;
                 }
                 // use this to parse string
