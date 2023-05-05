@@ -1,13 +1,13 @@
-apply plugin: 'com.android.application'
+apply plugin: "com.android.application"
 
 android {
-    namespace 'com.deckart.calculator'
-    compileSdkVersion 33
+    namespace "com.deckart.calculator"
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.deckart.calculator"
-        minSdkVersion 19
-        targetSdkVersion 33
+        minSdk 19
+        targetSdk 33
         versionCode 1
         versionName "1.0"
     }
@@ -16,7 +16,7 @@ android {
         release {
             minifyEnabled true
             shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt")
         }
         android.applicationVariants.all { variant ->
             variant.outputs.all { output ->
@@ -32,7 +32,7 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation "androidx.appcompat:appcompat:1.6.1"
+    implementation "com.google.android.material:material:1.9.0"
+    implementation "androidx.constraintlayout:constraintlayout:2.1.4"
 }
